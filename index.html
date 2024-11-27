@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title> Linked metadata as the key to FAIR, secure, distributed, and collaborative Research Data Management </title>
+  <meta name="description" content=" Linked metadata as the key to FAIR, secure, distributed, and collaborative Research Data Management ">
+  <meta name="author" content=" Stephan Heunis ">
+
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="reveal.js/dist/theme/beige.css">
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="custom_styles.css">
+</head>
+<body>
+
+<div class="reveal">
+<div class="slides">
+
+<!-- FRONT PAGE -->
+<section>
+    <h3>Linked metadata as the key to <br>
+        F.A.I.R., secure, distributed, and collaborative <br>
+        Research Data Management</h3>
+    <img src="pics/datalad_git.svg" style="height:300px; margin-bottom: 0; padding-bottom: 0;" alt="title image">
+    <div style="margin-top:0.5em;">
+        <table style="border: none;">
+            <tr>
+                <td>Stephan Heunis<br>
+                    <small>
+                        <a href="https://mas.to/@jsheunis" target="_blank">
+                        <img data-src="pics/mastodon.svg" style="height:30px;margin:0px" />
+                        @jsheunis
+                        </a>
+                    </small>
+                    <small>
+                        <a href="https://github.com/jsheunis" target="_blank">
+                        <img data-src="pics/GitHub.png" style="height:30px;margin:0px" />
+                        jsheunis
+                        </a>
+                    </small>
+                </td>
+                <td style="text-align: center;">
+                    <img style="height:80px;margin-right:1px;margin-bottom:5px;margin-top: 1em; vertical-align:middle;" data-src="pics/funders/fzj_logo.svg" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p style="text-align: center;">
+        <small><a href="http://psychoinformatics.de" target="_blank">Psychoinformatics lab</a>,
+            Institute of Neuroscience and Medicine, Brain &amp; Behavior (INM-7)<br>Research Center Jülich, Germany
+            <br>
+        </small>
+    </p>
+    <div>
+        <small><em>
+            <br>Live slides: &nbsp; <a href="https://jsheunis.github.io/padme-talk-2024">jsheunis.github.io/padme-talk-2024</a>
+            <br>Sources: &nbsp; <a href="https://github.com/jsheunis/padme-talk-2024">github.com/jsheunis/padme-talk-2024</a>
+        </em></small>
+    </div>
+</section>
+
+<section>
+    <h2>Acknowledgements</h2>
+    <table>
+    <tr style="vertical-align:middle">
+      <td style="vertical-align:middle">
+        <dl style="margin-bottom:20px">
+          <dt style="margin-top:20px">DataLad software <br>
+              &amp; ecosystem</dt>
+          <dd style="margin-left:5px!important">
+            <ul style="margin-left:5px!important">
+                <li>Psychoinformatics Lab, <br>
+                Research center Jülich</li>
+                <li>Center for Open <br>
+                Neuroscience, <br>
+                Dartmouth College</li>
+                <li>Joey Hess (git-annex)</li>
+                <li><em>>100 additional contributors</em></li>
+            </ul>
+          </dd>
+        </dl>
+      </td>
+      <td style="vertical-align:middle">
+    <div style="margin-top:-20px;margin-bottom:-20px;text-align:center"><strong>Funders</strong></div>
+    <div style="margin-top:-20px">
+    <img style="height:150px;margin-right:0px" data-src="pics/funders/nsf.png" />
+    <img style="height:150px;margin-right:0px;margin-left:40px" data-src="pics/funders/binc.png" />
+    <img style="height:150px;margin-left:0px" data-src="pics/funders/bmbf_datalad.png" />
+    </div>
+    <div style="margin-top:-20px">
+    <img style="height:80px;margin-top:0px;margin-left:30px" data-src="pics/funders/fzj_logo.svg" />
+    <img style="height:60px;margin-left:50px;margin-bottom:25px" data-src="pics/funders/dfg_logo.png" />
+    </div>
+    <div style="margin-top:-20px">
+    <img style="height:100px" data-src="pics/funders/erc_logo.png" />
+    <img style="height:60px;margin-bottom:35px" data-src="pics/funders/erdf.png" />
+    </div>
+    <div style="margin-top:-20px">
+    <img style="height:80px;margin-right:20px;margin-bottom:5px" data-src="pics/funders/nrw_mkw_logo.png" />
+    <img style="height:60px;margin-right:20px" data-src="pics/funders/cbbs_logo.png" />
+    <img style="height:60px" data-src="pics/funders/LSA-Logo.png" />
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td colspan=2 width="100%">
+    <div style="margin-top:0px">
+    <div style="margin-top:20px;margin-bottom:-50px"><strong>Collaborators</strong></div>
+    <img style="height:100px;margin:0px;margin-left:100px" data-src="pics/collaborators/cbrain_logo.png" />
+    <img style="height:100px;margin:20px" data-src="pics/collaborators/hbp_logo.png" />
+    <img style="height:100px;margin:20px" data-src="pics/collaborators/conp_logo.png" />
+    <img style="height:120px;margin:10px" data-src="pics/collaborators/openneuro_logo.png" />
+    <img style="height:100px;margin:20px" data-src="pics/collaborators/ebrain-health-logo.png"/>
+    <img style="height:100px;margin:20px" data-src="pics/collaborators/GIN_logo.png" />
+    </div>
+    <div style="margin-top:-20px;text-align:center">
+    <img style="height:120px;margin:20px" data-src="pics/collaborators/sfb1451_logo.png" />
+    <img style="height:140px;margin:10px" data-src="pics/collaborators/brainlife_logo.png" />
+    <img style="height:100px;margin:20px" data-src="pics/collaborators/vbc_logo.png" />
+    </div>
+    </td>
+    </tr>
+    </table>
+</section>
+
+<section>
+    <h3><code>The ultimate goal of research data management</code></h3>
+    <img src="pics/fairdata.png" alt="fairdata" width="68%" style="margin-top: 2em;">
+</section>
+
+<section>
+    <h3><code>BUT ALSO: The ongoing existential crisis of open scientists</code></h3>
+    <img src="pics/fairdata_vs_dataprivacy.png" alt="" style="margin-top: 2em;">
+</section>
+
+<section>
+    <section data-transition="None-out">
+        <h3><code>AN OPPORTUNITY: <br>can metadata solve this?</code></h3>
+        <img src="pics/content_vs_metadata.png" alt="" width="55%" style="margin-top: 2em;">
+    </section>
+
+    <section data-transition="None">
+        <h3><code>AN OPPORTUNITY: <br>can metadata solve this?</code></h3>
+        <img src="pics/data_to_metadata_question.png" alt="" style="margin-top: 4em;">
+    </section>
+</section>
+
+<section>
+    <h3><code>So what is metadata actually?</code></h3>
+    <img src="pics/inherent_vs_additional_metadata.png" alt="" width="55%" >
+</section>
+
+<section>
+    <section data-transition="None-out">
+        <h3><code>Where do we source <em>inherent metadata</em>?</code></h3>
+        <img src="pics/datalad_dataset_git_vs_git_annex.png" alt="datalad_dataset_git_vs_git_annex" width="52%"  style="margin-top: 1em;">
+    </section>
+    <section data-transition="None">
+        <h3><code>Where do we source <em>inherent metadata</em>?</code></h3>
+        <img src="pics/datalad_install_package.png" alt="datalad_install_package" width="52%"  style="margin-top: 1em;">
+    </section>
+    <section data-transition="None">
+        <h3><code>Where do we source <em>inherent metadata</em>?</code></h3>
+        <img src="pics/datalad_create.png" alt="datalad_create" width="52%"  style="margin-top: 1em;">
+    </section>
+    <section data-transition="None">
+        <h3><code>Where do we source <em>inherent metadata</em>?</code></h3>
+        <img src="pics/datalad_version_control.png" alt="datalad_version_control" width="52%"  style="margin-top: 1em;">
+    </section>
+    <section data-transition="None">
+        <h3><code>Where do we source <em>inherent metadata</em>?</code></h3>
+        <img src="pics/datalad_push_clone_get.png" alt="datalad_push_clone_get" width="52%"  style="margin-top: 1em;">
+    </section>
+</section>
+
+<section>
+    <h3><code>💻 Demo 💻 <br>inherent metadata with DataLad</code> </h3>
+    <br>
+    Example: <a href="https://openneuro.org/datasets/ds005498/versions/1.1.1">a random dataset from OpenNeuro</a>
+    <div class="fragment" style="text-align: center; margin-top: 3em;">
+        <pre>
+            <code data-trim class="language-bash" onmousemove="showHover(event)" onmousedown="clickCopy(event)" onmouseleave="leaveElement(event)">
+                datalad clone https://github.com/OpenNeuroDatasets/ds005498.git mydata
+            </code>
+        </pre>
+    </div>
+    <div class="fragment" style="text-align: center;">
+        <pre>
+            <code data-trim class="language-bash" onmousemove="showHover(event)" onmousedown="clickCopy(event)" onmouseleave="leaveElement(event)">
+                cd mydata
+            </code>
+        </pre>
+    </div>
+    <div class="fragment" style="text-align: center;">
+        <pre>
+            <code data-trim class="language-bash" onmousemove="showHover(event)" onmousedown="clickCopy(event)" onmouseleave="leaveElement(event)">
+                du -sh
+            </code>
+        </pre>
+    </div>
+    <div class="fragment" style="text-align: center;">
+        <pre>
+            <code data-trim class="language-bash" onmousemove="showHover(event)" onmousedown="clickCopy(event)" onmouseleave="leaveElement(event)">
+                ls
+            </code>
+        </pre>
+    </div>
+    <div class="fragment" style="text-align: center;">
+        <pre>
+            <code data-trim class="language-bash" onmousemove="showHover(event)" onmousedown="clickCopy(event)" onmouseleave="leaveElement(event)">
+                open .
+            </code>
+        </pre>
+    </div>
+    <div class="fragment" style="text-align: center;">
+        <pre>
+            <code data-trim class="language-bash" onmousemove="showHover(event)" onmousedown="clickCopy(event)" onmouseleave="leaveElement(event)">
+                git annex info
+            </code>
+        </pre>
+    </div>
+    <div class="fragment" style="text-align: center;">
+        <pre>
+            <code data-trim class="language-bash" onmousemove="showHover(event)" onmousedown="clickCopy(event)" onmouseleave="leaveElement(event)">
+                datalad get sub-NTHC1016/ses-1/anat/sub-NTHC1016_ses-1_T1w.nii.gz
+            </code>
+        </pre>
+    </div>
+</section>
+
+
+<section>
+    <h3><code>Where do we source <em>contextual metadata</em>?</code></h3>
+    <br><br><br>
+    TODO
+</section>
+
+
+<section>
+    <section data-transition="None-out">
+        <h3><code>A benefit of structured and actionable metadata: <br>automated catalog generation</code></h3>
+        <img src="pics/closed_clinical_data_to_catalog.png" alt="closed_clinical_data_to_catalog"  style="margin-top: 1em;">
+    </section>
+    <section data-transition="None">
+        <h3><code>A benefit of structured and actionable metadata: <br>automated catalog generation</code></h3>
+        <img src="pics/datalad_catalog.png" alt="datalad_catalog" width="60%" style="margin-top: 1em;" >
+    </section>
+    <section data-transition="None">
+        <h3 style="margin-bottom: 2em;"><code>A benefit of structured and actionable metadata: <br>automated catalog generation</code></h3>
+
+        Examples of metadata-driven catalogs:
+        <ul style="margin-top: 1em; margin-bottom: 1em;">
+            <li>Google Dataset Search:  <a href="https://datasetsearch.research.google.com/">datasetsearch.research.google.com</a></li>
+            <li>Jülich Data (dataverse): <a href="https://data.fz-juelich.de/">data.fz-juelich.de</a></li>
+            <li>DataLad Catalog: <a href="https://data.sfb1451.de">data.sfb1451.de</a></li>
+        </ul>
+        <br>
+
+        <code>💻 Demo 💻 <br>SFB1451 Consortium Catalog</code>
+
+    </section>
+</section>
+
+<section>
+    <h3><code>Practically, how do we get actionable metadata?</code></h3>
+    <img src="pics/data_to_metadata_question_answer.png" alt="datalad_catalog" style="margin-top:1em; margin-bottom: 1em;">
+
+    <ul>
+        <li class="fragment fade-in">It comes down to serialization, via...</li>
+        <li class="fragment fade-in"><strong>Researchers</strong> and software pipelines</li>
+        <li class="fragment fade-in">But first: we have to provide structure to metadata
+            <ul>
+                <li class="fragment fade-in">allows <em>intuitive manual forms</em> that <em>validate on entry</em> and that <em>minimize effort and generality</em></li>
+                <li class="fragment fade-in">allows <em>automated metadata extraction</em></li>
+            </ul>
+        </li>
+    </ul>
+
+</section>
+
+<section>
+    <h3><code>For structure, <br>we have to model our data</code></h3>
+    <img src="pics/model_your_data.png" alt="model_your_data" width="65%" style="margin-top: 3em;">
+</section>
+
+<section>
+    <h3><code>For structure, <br>we have to model our data</code></h3>
+    <img src="pics/schema.png" alt="schema" width="65%" style="margin-top: 3em;">
+</section>
+
+
+<section>
+    <h3><code>With a schema...<br>comes great possibilities</code></h3>
+    <img src="pics/schema_to_tools.png" alt="model_your_data" width="60%" style="margin-top: 1em;">
+</section>
+
+<section>
+    <h3><code>With a schema...<br>comes great possibilities</code></h3>
+    <br><br><br>DEMO TODO <br>
+    <ul>
+        <li>LinkML</li>
+        <li>Datalad concepts (ontologies, vocabularies)</li>
+        <li>Shacl</li>
+        <li>Shacl-vue</li>
+        <li>RDF</li>
+    </ul>
+</section>
+
+<section>
+    <h3><code>What about metadata harmonization?</code></h3>
+    <img src="pics/metadata_serialization_and_harmonization.png" alt="metadata_serialization_and_harmonization" style="margin-top: 2em;">
+
+    <ul>
+        <li class="fragment fade-in">We make our metadata speak the <em>lingua franca</em>...</li>
+        <li class="fragment fade-in">...thereby making it interoperable with the wider ecosystem of online metadata...</li>
+        <li class="fragment fade-in">...which allows harmonization across standards...</li>
+        <li class="fragment fade-in">...and eventually representing information in a uniform way.</li>
+    </ul>
+</section>
+
+
+<section>
+    <h3><code>Resource description framework <br>for semantic and linked metadata</code></h3>
+    <img src="pics/rdf_nodes.png" alt="rdf_nodes" style="margin-top: 3em;">
+</section>
+
+
+<section>
+    <h3><code>Resource description framework <br>for semantic and linked metadata</code></h3>
+    <img src="pics/rdf_graphs.png" alt="rdf_graphs" style="margin-top: 3em;">
+</section>
+
+
+
+
+<!-- <section>
+    <h3><code>Examples of privacy preserving technology and decentralized tools:</code></h3>
+    <br>
+    
+    <ul>
+        <li><a href="https://www.openmined.org/">OpenMined</a>: secure connections, running algorithms without seeing data</li>
+        <li><a href="https://distributedlearning.ai/">Vantage6</a>: delivering algorithms to data stations and collect their results</li>
+        <li><a href="https://pht.health-ri.nl/">Personal Health Train</a>: federated machine learning in radiomics</li>
+        <li><a href="https://www.datalad.org/">DataLad</a>: decentralized data storage, access, collaboration, tracking</li>
+        <li><a href="https://coinstac.org/">COINstac</a>: decentralized pipelines, results aggregation, differential privacy</li>
+        <li><a href="https://search.kg.ebrains.eu/">EBRAINS</a>: GDPR-compliant digital research infrastructure of Human Brain Project</li>
+        <li><a href="https://portal.conp.ca/search">Canadian Open Neuroscience Platform</a>: FAIR data access while keeping personal data private</li>
+    </ul>
+</section>
+
+<section>
+    <h3><code>Example of decentralized code-to-data</code></h3>
+    <br>
+    <img src="pics/comic_box6_publishing.svg" alt="" style="margin-bottom: 2em;">
+</section>
+
+<section>
+    <h3><code>Example of decentralized code-to-data: </code></h3>
+    <br>
+    <img src="pics/comic_box6_consumption.svg" alt="" style="margin-bottom: 2em;">
+</section>
+
+<section>
+    <h3><code>Example of decentralized code-to-data</code></h3>
+    <br>
+    <img src="pics/comic_box7.svg" alt="" style="margin-bottom: 2em;">
+</section> -->
+
+
+<section>
+    <h2><code>Thank you!</code></h2>
+</section>
+
+
+
+
+</div> <!-- /.slides -->
+</div> <!-- /.reveal -->
+
+<script src="reveal.js/dist/reveal.js"></script>
+<script src="reveal.js/plugin/notes/notes.js"></script>
+<script src="reveal.js/plugin/markdown/markdown.js"></script>
+<script src="reveal.js/plugin/highlight/highlight.js"></script>
+<script src="custom_functions.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+<script src="reveal.js/plugin/copycode/copycode.js"></script> -->
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+        height: 960,
+        // Factor of the display size that should remain empty around the content
+        margin: 0.02,
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+        maxScale: 1.0,
+
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        slideNumber: 'c',
+        pdfSeparateFragments: false,
+        pdfMaxPagesPerSlide: 1,
+        pdfPageHeightOffset: -1,
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+    });
+</script>
+</body>
+</html>
